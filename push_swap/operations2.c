@@ -49,7 +49,7 @@ t_StackNode	*get_node(t_Stack *s, size_t index)
 	size_t		i;
 	t_StackNode	*curr;
 
-	if (index >= s->size)
+	if (!s || index >= s->size || is_empty(s))
 		return (NULL);
 	if (index == 0)
 		return (s->head);

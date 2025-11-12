@@ -22,11 +22,11 @@ int	check_bonus(int argnum, char **input)
 	while (j < argnum)
 	{
 		i = 0;
+		if (!input[j] || input[j][i] == '\0' || ft_strlen(input[j] + i) > 10)
+			return (0);
 		if ((input[j][i] == '-' || input[j][i] == '+') && input[j][i
 			+ 1] != '0')
 			i++;
-		if (!input[j][i] || ft_strlen(input[j] + i) > 10)
-			return (0);
 		while (input[j][i])
 		{
 			if (!ft_isdigit(input[j][i]))

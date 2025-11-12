@@ -38,7 +38,7 @@ void	push(t_Stack *stack, int data)
 		return ;
 	newnode = (t_StackNode *)malloc(sizeof(t_StackNode));
 	if (!newnode)
-		return ;
+		exit(1) ;
 	newnode->data = data;
 	if (stack->size == 0)
 	{

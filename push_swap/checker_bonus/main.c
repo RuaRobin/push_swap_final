@@ -19,7 +19,11 @@ void	read_from_input(t_Stack *stack_a, t_Stack *stack_b)
 	op = get_next_line(0);
 	while (op != NULL)
 	{
-		operation_exec(op, stack_a, stack_b);
+		if (!operation_exec(op, stack_a, stack_b))
+		{
+			free(op);
+			error(stack_a, stack_b);
+		}
 		if (op)
 			free(op);
 		op = get_next_line(0);

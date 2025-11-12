@@ -23,6 +23,7 @@ void	rotate_rev_check(t_Stack *stack)
 		temp = temp->next;
 	stack->head = stack->tail;
 	stack->tail = temp;
+	tack->tail->next = stack->head;
 }
 
 void	rrr_check(t_Stack *stack_a, t_Stack *stack_b)
@@ -50,13 +51,14 @@ int	is_sorted_bonus(t_Stack *stack)
 	return (1);
 }
 
-void	error(void)
+void	error(t_Stack *stack_a, t_Stack *stack_b)
 {
 	write(2, "Error\n", 6);
+	free_stacks(stack_a, stack_b);
 	exit(1);
 }
 
-void	operation_exec(char *op_name, t_Stack *stack_a, t_Stack *stack_b)
+int		operation_exec(char *op_name, t_Stack *stack_a, t_Stack *stack_b)
 {
 	if (!ft_strcmp(op_name, "pa\n"))
 		pp_check(stack_a, stack_b, 'a');
@@ -81,5 +83,6 @@ void	operation_exec(char *op_name, t_Stack *stack_a, t_Stack *stack_b)
 	else if (!ft_strcmp(op_name, "rrr\n"))
 		rrr_check(stack_a, stack_b);
 	else
-		error();
+		return (0);
+	return (1);
 }

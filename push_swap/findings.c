@@ -21,6 +21,8 @@ int	find_min_index(t_Stack *s)
 
 	min_index = 0;
 	index = 1;
+	if(is_empty(s))
+		return (-1);
 	min = s->head->data;
 	curr = s->head->next;
 	while (curr != s->head)
@@ -36,32 +38,12 @@ int	find_min_index(t_Stack *s)
 	return (min_index);
 }
 
-int	find_min(int *arr, size_t size)
-{
-	int		min;
-	size_t	i;
-	int		min_index;
-
-	i = 0;
-	min_index = 0;
-	min = arr[0];
-	while (i < size)
-	{
-		if (arr[i] < min)
-		{
-			min = arr[i];
-			min_index = i;
-		}
-		i++;
-	}
-	return (min_index);
-}
-
 int	find_max(t_Stack *s)
 {
 	t_StackNode	*curr;
 	int			max;
-
+	if (is_empty(s))
+		return (INT_MIN);
 	max = s->head->data;
 	curr = s->head->next;
 	while (curr != s->head)

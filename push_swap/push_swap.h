@@ -68,7 +68,6 @@ int						find_target(t_StackNode *node, t_Stack *Stack);
 void					move_a_tohead(t_Stack *A, t_StackNode *nodeA,
 							size_t node_indix);
 int						find_min_index(t_Stack *s);
-int						find_min(int *arr, size_t size);
 int						find_max(t_Stack *s);
 void					bring_min_to_top(t_Stack *s);
 

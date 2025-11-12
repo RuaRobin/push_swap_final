@@ -40,49 +40,46 @@ int	calc_cost(t_Stack *stack_a, int node_a_ind, t_Stack *stack_b,
 	return (cost_a + cost_b);
 }
 
-void	search_for_target_cost(t_Stack *stack_a, t_Stack *stack_b, int *costs,
-		int *targets)
+int	search_for_min_cost(t_Stack *stack_a, t_Stack *stack_b)
 {
 	t_StackNode	*node_b;
 	size_t		i;
-	int			target;
+	int 		cost;
+	int 		min_index;
+	int 		min_cost;
 
 	i = 0;
 	node_b = stack_b->head;
+	min_cost = INT_MAX;
+	min_index = 0;
 	while (i < stack_b->size)
 	{
-		target = find_target(node_b, stack_a);
-		costs[i] = calc_cost(stack_a, target, stack_b, i);
-		targets[i] = target;
+		cost = calc_cost(stack_a,find_target(node_b, stack_a), stack_b, i);
+		if (min_cost > cost)
+		{
+			min_cost = cost;
+			min_index = i;
+		}
 		node_b = node_b->next;
 		i++;
 	}
+	return min_index;
+
 }
 
 void	push_swap(t_Stack *stack_a, t_Stack *stack_b)
 {
 	size_t	index;
-	int		*costs;
-	int		*targets;
+	int		target;
 
 	while (stack_a->size != 3)
 		pp(stack_a, stack_b, 'b');
 	sort_three(stack_a);
 	while (stack_b->size > 0)
 	{
-		costs = (int *)ft_calloc(stack_b->size, sizeof(int));
-		targets = (int *)ft_calloc(stack_b->size, sizeof(int));
-		if (!costs || !targets)
-		{
-			free(costs);
-			free(targets);
-			return ;
-		}
-		search_for_target_cost(stack_a, stack_b, costs, targets);
-		index = find_min(costs, stack_b->size);
-		move_tohead(stack_a, targets[index], stack_b, index);
-		free(costs);
-		free(targets);
+		index = search_for_min_cost(stack_a, stack_b);
+		target = find_target(get_node(stack_b,index),stack_a);
+		move_tohead(stack_a, target, stack_b, index);
 		pp(stack_a, stack_b, 'a');
 	}
 	bring_min_to_top(stack_a);

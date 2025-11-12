@@ -59,7 +59,7 @@ t_Stack					*create_stack_from_args_bon(int argnum, char **input);
 
 //sorting related
 int						is_sorted_bonus(t_Stack *Stack);
-void					operation_exec(char *op_name, t_Stack *stack_a,
+int					operation_exec(char *op_name, t_Stack *stack_a,
 							t_Stack *stack_b);
 
 //get next line
